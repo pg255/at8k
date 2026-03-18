@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <signal.h>
 
 namespace at8k::daemon {
 	void start(std::filesystem::path project_directory, std::filesystem::path at8k_directory) {
@@ -100,5 +101,42 @@ namespace at8k::daemon {
 		unlink(socket_path.c_str());
 		unlink(pid_path.c_str());
 		close(server_fd);
+	}
+	
+	bool message(std::filesystem::path at8k_directory, std::string message) {
+		std::string socket_path = (at8k_directory / "at8k.sock").string();
+		
+		// Creates socket
+		int fd = socket(AF_UNIX, SOCK_STREAM, 0);
+		sockaddr_un addr{};
+		addr.sun_family = AF_UNIX;
+		strncpy(addr.sun_path, socket_path.c_str(), sizeof(addr.sun_path) - 1);
+		
+		// Connects to the socket 
+		if (connect(fd, (sockaddr*)&addr, sizeof(addr)) < 0) {
+		    at8k::cli::error("AT8K is not running");
+			return 1;
+		}
+		
+		// Sends the message
+		write(fd, message.c_str(), message.size());
+		
+		// Closes the socket
+		close(fd);
+		
+		return 0;
+	}
+	
+	bool exists(std::filesystem::path at8k_directory) {
+		std::string pid_path = (at8k_directory / "at8k.pid").string();
+		std::ifstream pid_file(pid_path);
+		
+		if (!pid_file) return false;
+		
+		pid_t pid;
+		pid_file >> pid;
+		pid_file.close();
+		
+		return kill(pid, 0) == 0;
 	}
 };
