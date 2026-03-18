@@ -22,12 +22,12 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 	
-	if (std::string(argv[1]) == "--version") {
+	if (std::string(argv[argc - 1]) == "--version") {
 		std::cout << "AT8K " << AT8K_VERSION << "\n";
 		return 0;
 	}
 	
-	if (std::string(argv[1]) == "--help") {
+	if (std::string(argv[argc - 1]) == "--help") {
 		std::cout << AT8K_HELP;
 		return 0;
 	}
@@ -43,10 +43,10 @@ int main(int argc, char* argv[]) {
 	
 	if (std::string(argv[1]) == "stop") {
 		if (at8k::daemon::message(at8k_directory, "stop")) {
-			at8k::cli::info("AT8K has been stopped");
+			at8k::cli::warn("Stopping AT8K failed");
 			return 1;
 		} else {
-			at8k::cli::warn("Stopping AT8K failed");
+			at8k::cli::info("AT8K has been stopped");
 			return 0;
 		}
 	}
@@ -61,6 +61,11 @@ int main(int argc, char* argv[]) {
 	}
 	
 	if (std::string(argv[1]) == "status") {
+		if (at8k::daemon::exists(at8k_directory)) {
+			at8k::cli::info("AT8K is running");
+		} else {
+			at8k::cli::info("AT8K is not running");
+		}
 		return 0;
 	}
 	
