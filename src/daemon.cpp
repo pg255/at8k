@@ -54,8 +54,8 @@ namespace at8k::daemon {
 		close(STDERR_FILENO); // no std::cerr
 		
 		// Define file locations
-		std::string socket_path = (at8k_directory / "at8k.sock").string();
-		std::string pid_path = (at8k_directory / "at8k.pid").string();
+		std::string socket_path = (at8k_directory / "daemon/at8k.sock").string();
+		std::string pid_path = (at8k_directory / "daemon/at8k.pid").string();
 		
 		// Creates PID file
 		std::ofstream pid_file(pid_path);

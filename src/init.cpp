@@ -1,4 +1,5 @@
 #include "at8k/log.hpp"
+#include "at8k/templates.hpp"
 
 #include <fstream>
 #include <filesystem>
@@ -17,20 +18,26 @@ namespace at8k {
 			std::filesystem::create_directories(at8k_directory);
 		}
 		
-		std::ifstream ctf_configuration_file("ctf.toml");
-		
-		if (ctf_configuration_file) {
-			
+		if (std::filesystem::exists("ctf.toml")) {
+			if (!project_exists) {
+				at8k::cli::warn("ctf.toml already exists");
+			}
 		} else {
-			
+			std::ofstream file("ctf.toml");
+			file << at8k::templates::ctf;
+			file.close();
+			at8k::cli::info("Created ctf.toml");
 		}
-		
-		std::ifstream exploits_configuration_file("exploits.toml");
-		
-		if (exploits_configuration_file) {
-			
+				
+		if (std::filesystem::exists("exploits.toml")) {
+			if (!project_exists) {
+				at8k::cli::warn("exploits.toml already exists");
+			}
 		} else {
-			
+			std::ofstream file("exploits.toml");
+			file << at8k::templates::exploits;
+			file.close();
+			at8k::cli::info("Created exploits.toml");
 		}
 	};
 };
