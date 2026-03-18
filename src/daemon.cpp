@@ -127,7 +127,7 @@ namespace at8k::daemon {
 		return 0;
 	}
 	
-	bool exists(std::filesystem::path at8k_directory) {
+	bool is_running(std::filesystem::path at8k_directory) {
 		std::string pid_path = (at8k_directory / "at8k.pid").string();
 		std::ifstream pid_file(pid_path);
 		

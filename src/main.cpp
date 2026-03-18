@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 	if (std::string(argv[1]) == "status") {
-		if (at8k::daemon::exists(at8k_directory)) {
+		if (at8k::daemon::is_running(at8k_directory)) {
 			at8k::cli::info("AT8K is running");
 		} else {
 			at8k::cli::info("AT8K is not running");
