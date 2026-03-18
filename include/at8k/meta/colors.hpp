@@ -1,0 +1,12 @@
+#pragma once
+
+#define COLOR_RED "\033[31m"
+#define COLOR_ORANGE "\033[38;5;208m"
+#define COLOR_YELLOW "\033[38;5;220m"
+#define COLOR_BLUE "\033[38;5;33m"
+#define COLOR_RESET "\033[0m"
+
+#define COLOR_INFO COLOR_BLUE
+#define COLOR_INFO2 COLOR_YELLOW
+#define COLOR_WARNING COLOR_ORANGE
+#define COLOR_ERROR COLOR_RED
