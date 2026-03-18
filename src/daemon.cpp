@@ -14,6 +14,8 @@ namespace at8k::daemon {
 	void start(std::filesystem::path project_directory, std::filesystem::path at8k_directory) {
 		// https://youtu.be/65DarzNIFR0 was a life saver
 		
+		std::filesystem::create_directories(at8k_directory / "daemon");
+		
 		at8k::cli::info("Starting AT8K daemon");
 		
 		// Forks this process
@@ -104,7 +106,7 @@ namespace at8k::daemon {
 	}
 	
 	bool message(std::filesystem::path at8k_directory, std::string message) {
-		std::string socket_path = (at8k_directory / "at8k.sock").string();
+		std::string socket_path = (at8k_directory / "daemon/at8k.sock").string();
 		
 		// Creates socket
 		int fd = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -128,7 +130,7 @@ namespace at8k::daemon {
 	}
 	
 	bool is_running(std::filesystem::path at8k_directory) {
-		std::string pid_path = (at8k_directory / "at8k.pid").string();
+		std::string pid_path = (at8k_directory / "daemon/at8k.pid").string();
 		std::ifstream pid_file(pid_path);
 		
 		if (!pid_file) return false;

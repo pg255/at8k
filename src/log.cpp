@@ -1,6 +1,7 @@
+#include "at8k/meta/colors.hpp"
+
 #include <iostream>
 #include <string>
-#include "at8k/meta/colors.hpp"
 
 namespace at8k::cli {
 	void error(std::string message) {

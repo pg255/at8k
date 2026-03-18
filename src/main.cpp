@@ -13,7 +13,6 @@ int main(int argc, char* argv[]) {
 	
 	std::filesystem::path project_directory = std::filesystem::current_path();
 	std::filesystem::path at8k_directory = project_directory / ".at8k";
-	std::filesystem::create_directories(at8k_directory);
 	
 	// if no arguments
 	if (argc == 1) {
