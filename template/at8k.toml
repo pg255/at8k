@@ -1,0 +1,29 @@
+[tick]
+# Start time of the CTF
+tick_start = 2026-03-14T12:00:00+02:00
+# Tick length in seconds
+tick_length = 180
+
+[flag_ids]
+# URL with flag ids
+url = "https://ad.rabac.tf/competition/teams.json"
+# JSON path to team ids
+teams = "teams"
+# JSON path to flag ids
+flag_ids = "flag_ids.$service.$team"
+
+[flag]
+# Flag format regex
+format="AT8K_[A-Za-z0-9+/]{32}"
+
+# Protocol (netcat/http)
+protocol="netcat"
+# IP of flag submission server
+ip = "1.2.3.4"
+# Port of flag submission server
+port = 1234
+
+[targets]
+# Teams not to hack
+# Put NOP team id and your team id here
+ignore=["1", "418"]
