@@ -11,7 +11,7 @@
 	standard: c++23
 	compiler: g++
 	compilerlauncher: ccache
-	compileflags: embed-dir=templates
+	compileflags: -embed-dir=templates
 	
 	customflags: export-compile-commands, export-vscode-sln
 
