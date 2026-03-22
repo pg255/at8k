@@ -13,4 +13,7 @@ namespace at8k::cli {
 	void info(std::string message) {
 		std::cerr << COLOR_INFO << message << COLOR_RESET << std::endl;
 	}
+	void info2(std::string info1, std::string info2) {
+		std::cerr << COLOR_INFO << info1 << COLOR_INFO2 << info2 << COLOR_RESET << std::endl;
+	}
 };
